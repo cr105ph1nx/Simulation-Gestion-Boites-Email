@@ -22,6 +22,7 @@ Dans ce qui suit, on ne mentionne pas les constructeurs, accesseurs et mutateurs
 
 ### public class Profil
 // Attributs
+
 String nom, prenom;
 Genre genre;
 LocalDate date_nais;
@@ -37,13 +38,14 @@ Ex : Lilia Mehamli
 * Public enum Genre{Feminin, Masculin}: Créer le type Genre qui ne peut prendre que les valeurs: Féminin, Masculin.
 
 ### public class AdrMail
-public class AdrMail{
 // Attributs
+
 String pseudo;
 String site;
 String mp;
 Profil profil ;
 BoiteMail boite ;
+
 // Méthodes
 * Public boolean pseudoValide() : Vérifier la validité du pseudonyme (non vide, doit commencer par une lettre, il peut comporter des chiffres et que les caractères tiret et point).
 * Public boolean siteValide() : Vérifier la validité du site (non vide, doit commencer par une lettre, il doit comporter un point et ne peut pas comporter des chiffres).
@@ -57,8 +59,10 @@ Ex : lilia.mehamli@protonmail.com
 
 ### public class AdrMailProf extends AdrMail
 // Attributs
+
 String entreprise;
 Domaine domaine;
+
 // Méthodes
 * Public AdrMailProf Saisir(): Construire un objet AdrMailProf personnalisé en effectuant des saisies au clavier.
 * Public boolean Equals(AdrMailProf adrMailProf) : Redéfinie afin de vérifierl’égalité ou l’inégalité de deux adresses mail professionelles.
@@ -68,8 +72,10 @@ Ex : g.crowder@openmindsclub.net
 
 ### public class PieceJointe
 // Attributs
+
 String nom;
 int taille;
+
 // Méthodes
 * Public PieceJointe Saisir() : Construire un objet PieceJointe personnalisé en effectuant des saisies au clavier.
 * Public Boolean Equals(PieceJointe pieceJointe) : Redéfinie afin de vérifier l’égalité ou l’inégalité de deux pièces jointes.
@@ -78,6 +84,7 @@ Ex : Python, 253 octets
 
 ### public class Message
 // Attributs
+
 String objet;
 String contenu;
 LocalDate date_crt;
@@ -85,6 +92,7 @@ LocalTime heure_crt;
 Etat etat;
 int taille;
 AdrMail expediteur;
+
 // Méthodes
 * Public Message Creer() throws ExceptionMessageVide: Construire un objet Message personnalisé en effectuant des saisies au clavier. Une exception est levée si l’objet ou le contenu attachés sont vides. L’exception ExceptionMessageVide est levee dans les methodes de mutations public String setObjet() et public String setContenu().
 * Public MessageAttach CreerAvecAttach() throws ExceptionMessageVide: Construire un objet MessageAttach personnalisé en effectuant des saisies au clavier. Une exception est levée si l’objet ou le contenu attachés sont vides. L’exception ExceptionMessageVide est levee dans les methodes de mutations public String setObjet() et public String setContenu().
@@ -105,8 +113,10 @@ Taille : 183 octets
 
 ### public class MessageAttach extends Message
 // Attributs
+
 LinkedList<PieceJointe> piecesJointes = new LinkedList<PieceJointe>();
 final int limit = 1048576; //10 Mb
+  
 // Méthodes
 * Public MessageAttach Saisir() throws ExcepetionPieceRepetition, ExceptionExceedsTailleLimite: Construire un objet MessageAttach personnalisé en effectuant des saisies au clavier. Une exception est levée dans le cas ou on attache la même pièce jointe, si les pièces jointes dépassent 10 Mo.
 * Public Boolean Equals(MessageAttach messageAttach) : Redéfinie afin de vérifier l’égalité ou l’inégalité de deux messages attaches.
@@ -115,6 +125,8 @@ personnalisée, levée dans le cas où on essaie d’attacher deux fois la même
 * Static class ExceptionExceedsTailleLimite extends Exception: Créer une exception personnalisée, levée dans le cas où l’attachement dépasse 10Mo.
   
 ### public class BoiteMail
+// Attributs
+
 LinkedList<Message> recus = new LinkedList<>(),
  envoyes = new LinkedList<>(),
  brouillons = new LinkedList<>(),
@@ -122,6 +134,7 @@ LinkedList<Message> recus = new LinkedList<>(),
  corbeille = new LinkedList<>(),
  spam = new LinkedList<>();
 final int capacite = 10 * 1048576; // 100 Mb
+  
 // Méthodes
 * Public LinkedList<AdrMail> EnvoyerMessage(LinkedList<AdrMail> adresses, int indexExpediteur, Message message) : Envoyer un message à un destinataire (ou plusieurs), spécifier l’adresse (ou les adresses) du (des) destinataire(s)). Et ajouter le message dans le dossier « envoyés ». L’exception est générée à partir de la méthode appelant EnvoyerMessage().
 * Public LinkedList<AdrMail> EnvoyerMessage(LinkedList<AdrMail> adresses, int indexExpediteur, MessageAttach message) : Envoyer un message à un destinataire (ou plusieurs), spécifier l’adresse (ou les adresses) du (des) destinataire(s)). Et ajouter le message dans le dossier « envoyés ». L’exception est générée à partir de la méthode appelant EnvoyerMessage().
@@ -148,15 +161,18 @@ final int capacite = 10 * 1048576; // 100 Mb
 ## Package : application 
 
 ### public class MessageComparator implements Comparator
+
 // Méthodes
 Public int compare(Object obj1, Object obj2): Comparer les Messages MyObj1 et MyObj2. Cette méthode renvoie zéro si les messages ont la même date et le même objet. Elle renvoie une valeur positive si la date ou l’objet du message MyObj1 viennent avant le message MyObj2. Sinon, une valeur négative est renvoyée.
 
 ### public class AppMessagerie
 // Attributs
+
 LinkedList<AdrMail> adresses = new LinkedList<>();
 LinkedList<AdrMail> adrPublics = new LinkedList<>();
 LinkedList<AdrMail> adrPros = new LinkedList<>();
 LinkedList<Message> messages = new LinkedList<>();
+  
 // Méthodes
 * Void CreationAdrMail(): Création des adresses e-mail (avec les profils).
 * Void CreationMessages(): Création des messages et messages attachées.
@@ -195,6 +211,7 @@ par la catégorie d’âge comprise entre 18 et 35 ans.
   
 # Conclusion 
   L’objectif de créer une simulation d’une gestion de boites de messageries (dans le langage orienté objet JAVA) en interaction avec l’utilisateur est bien atteint. Je regrette cependant qu’au début du projet, mes connaissances en Programmation Orientée Objet et surtout mes compétences dans ce domaine, étaient un peu vagues. Je me suis aperçu qu’il reste quelques façons pour permettre des optimisations supplémentaires ainsi que beaucoup de choses qu’il pourrait être intéressant d’essayer, comme par exemple, développer une interface graphique pour faciliter l’utilisation de ce programme, utilisant une bibliothèque GUI pour ce grès.
+  
    Si le projet était à refaire, je ne le referai pas de la même manière. Ceci étant, le projet m’a pleinement profité et je pense beaucoup mieux comprendre maintenant ce que l’on attendait de moi et ce qu’un langage orienté objet peut apporter.
   
   Ceci dit, cette expérience m’a permis de répondre à tous les questionnements que j’avais au sujet de la programmation orientée objet, et de fortifier ma compréhension des théories acquises en cours et en TD.
